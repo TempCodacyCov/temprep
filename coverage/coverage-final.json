@@ -1,1 +1,2 @@
-{}
+{"D:\\FS\\Desarrollo\\coverage-react\\src\\components\\Hello.jsx": {"path":"D:\\FS\\Desarrollo\\coverage-react\\src\\components\\Hello.jsx","statementMap":{"0":{"start":{"line":3,"column":14},"end":{"line":9,"column":1}},"1":{"start":{"line":4,"column":4},"end":{"line":8,"column":5}}},"fnMap":{"0":{"name":"(anonymous_0)","decl":{"start":{"line":3,"column":14},"end":{"line":3,"column":15}},"loc":{"start":{"line":3,"column":20},"end":{"line":9,"column":1}},"line":3}},"branchMap":{},"s":{"0":1,"1":1},"f":{"0":1},"b":{},"_coverageSchema":"1a1c01bbd47fc00a2c39e90264f33305004495a9","hash":"6fc7f5cb689a2f7faf8bf27bced8fc93b1d33737"}
+}
