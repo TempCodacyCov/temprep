@@ -1,19 +1,84 @@
-name: codacy-coverage-reporter
+name: Codacy Analysis CLI
 
-# Only trigger, when the build workflow succeeded
-on:
-  workflow_run:
-    workflows: ["Codacy Analysis CLI"]
-    types:
-      - completed
+on: ["push"]
 
 jobs:
+#  codacy-analysis-cli:
+#    name: Codacy Analysis CLI
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout code
+#        uses: actions/checkout@main
+
+#     - name: Run Codacy Analysis CLI
+#        uses: codacy/codacy-analysis-cli-action@master
+#        with:
+          # tool: <CLIENT_SIDE_TOOL_NAME>
+#          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+          # or
+          # api-token: ${{ secrets.CODACY_API_TOKEN }}
+#          upload: true
+#          max-allowed-issues: 2147483647
+          
+#  codacy-security-scan:
+#    needs: codacy-analysis-cli
+#    name: Codacy Security Scan
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout code
+#        uses: actions/checkout@main
+
+#      - name: Run Codacy Analysis CLI
+#        uses: codacy/codacy-analysis-cli-action@master
+#        with:
+#          output: results.sarif
+#          format: sarif
+          # Adjust severity of non-security issues
+#          gh-code-scanning-compat: true
+          # Force 0 exit code to allow SARIF file generation
+          # This will handover control about PR rejection to the GitHub side
+#          max-allowed-issues: 2147483647
+      
+      # Upload the SARIF file generated in the previous step
+#      - name: Upload SARIF results file
+#        uses: github/codeql-action/upload-sarif@main
+#        with:
+#          sarif_file: results.sarif
+
+  coverage-report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+    
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.14.0
+              
+      - run: |
+          npm install
+          npm run coverage
+          ls
+  
+
+
   codacy-coverage-reporter:
+    needs: coverage-report
     runs-on: ubuntu-latest
     name: codacy-coverage-reporter
     steps:
+    
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.14.0
+              
+      - run: |
+          ls
+          
       - uses: actions/checkout@v2
       - name: Run codacy-coverage-reporter
+     
         uses: codacy/codacy-coverage-reporter-action@v1
         with:
           project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
