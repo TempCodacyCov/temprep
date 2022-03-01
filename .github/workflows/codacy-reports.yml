@@ -59,29 +59,12 @@ jobs:
           npm install
           npm run test -- --coverage --watchAll=false
           ls
-  
-
-
-  codacy-coverage-reporter:
-    needs: coverage-report
-    runs-on: ubuntu-latest
-    name: codacy-coverage-reporter
-    steps:
-    
-      - name: Setup Node
-        uses: actions/setup-node@v1
-        with:
-          node-version: 16.14.0
-              
-      - run: |
-          ls
           
-      - uses: actions/checkout@v2
-      - name: Run codacy-coverage-reporter
-     
+      - name: Launch Report 
         uses: codacy/codacy-coverage-reporter-action@v1
         with:
           project-token: ${{ secrets.CODACY_PROJECT_TOKEN_NEW }}
           # or
           #api-token: ${{ secrets.CODACY_API_TOKEN }}
           coverage-reports: coverage/lcov.info
+      
